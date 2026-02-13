@@ -66,6 +66,13 @@ body {
   position: relative;
 }
 
+/* Helper for JS toggle */
+.meme-grid.visible-grid {
+  display: grid;
+  /* Default for desktop */
+}
+
+/* Override for mobile in media query below */
 .text-box p {
   margin: 0;
   text-align: left;
@@ -499,7 +506,8 @@ body {
   }
 }
 
-@media screen and (max-width: 430px) {
+/* Mobile Optimization (iPhone 12 / 12 Pro / 13 / 14 - approx 390px width) */
+@media screen and (max-width: 450px) {
 
   /* Specific tweaks for iPhone 12 Pro / modern mobile */
   .container {
@@ -570,23 +578,93 @@ body {
     /* Ensure space from bottom */
   }
 
-  /* Music/Meme Page Tweaks */
-  .music-title,
-  .meme-title {
-    font-size: 1.8rem;
-    margin-top: 20px;
+  /* Music Page Optimization */
+  .music-page {
+    justify-content: flex-start;
+    /* Start from top to avoid cutting off */
+    padding-top: 50px;
+    overflow-y: auto;
+    /* Allow scrolling if content is too long */
+  }
+
+  .music-title {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
   }
 
   .media-container {
-    gap: 10px;
+    flex-direction: column;
+    /* Stack GIFs vertically */
+    gap: 15px;
+    padding-bottom: 50px;
+    /* Space for scrolling */
   }
 
   .funny-gif {
-    max-width: 40vw;
-    /* 2 per row roughly */
+    max-width: 60%;
+    /* Make them a bit bigger but stacked */
+    height: auto;
   }
 
   .gif-main {
-    max-width: 80vw;
+    max-width: 80%;
+    order: -1;
+    /* Show main Husky first */
+  }
+
+  /* Meme Page Optimization */
+  .meme-page {
+    justify-content: flex-start;
+    padding-top: 20px;
+    overflow-y: auto;
+  }
+
+  .meme-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .meme-grid,
+  .meme-grid.visible-grid {
+    display: flex;
+    /* Stack everything nicely */
+    flex-direction: column;
+    width: 90%;
+    gap: 20px;
+    padding-bottom: 50px;
+  }
+
+  .center-meme {
+    margin: 0;
+    order: -1;
+    /* Ensure the main message is FIRST seen */
+    width: 100%;
+  }
+
+  .main-meme {
+    max-width: 90%;
+    width: auto;
+    border-width: 3px;
+  }
+
+  .top-text,
+  .bottom-text {
+    font-size: 1.3rem;
+    width: 100%;
+  }
+
+  /* Other meme images */
+  .meme-img {
+    max-width: 80%;
+    border-radius: 8px;
+    /* Optional: hide some less important memes if screen is too cluttered
+    display: none; 
+    */
+  }
+
+  /* Make sure the first couple are visible */
+  .meme-img:nth-child(1),
+  .meme-img:nth-child(2) {
+    display: block;
   }
 }

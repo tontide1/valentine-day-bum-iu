@@ -348,8 +348,13 @@ setTimeout(() => {
     setTimeout(() => {
       const memeGrid = document.querySelector(".meme-grid");
       if (memeGrid) {
-        // Use grid layout, responsiveness handled by CSS
-        memeGrid.style.display = "grid";
+        // Remove inline display:none to let CSS rules take over (grid vs flex)
+        memeGrid.style.display = "";
+        // Add a class that ensures it's visible, if 'display: none' was in the css class itself (it was inline styled)
+        // Since we had style="display: none;" in HTML, setting it to "" might revert to default block/div, 
+        // but our CSS defines .meme-grid as grid/flex.
+        // To be safe and ensure the CSS applies:
+        memeGrid.classList.add("visible-grid");
       }
     }, 2000);
   }
